@@ -9,15 +9,15 @@ import { PostContextProvider } from "./context/PostContextProvider";
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<PostList />} />
       <Route
-        path="/"
+        path="/:id"
         element={
           <PostContextProvider>
-            <PostList />
+            <PostDetails />
           </PostContextProvider>
         }
       />
-      <Route path="/:id" element={<PostDetails />} />
     </Routes>
   );
 }

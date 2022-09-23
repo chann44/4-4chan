@@ -6,9 +6,7 @@ const api = axios.create({
 
 export const makeRequest = async (url: string, options: any) => {
   try {
-    console.log("hi");
     const res = await api(url, options);
-    console.log(res);
     return res.data;
   } catch (e: any) {
     if (e) {

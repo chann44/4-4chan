@@ -12,17 +12,8 @@ app.use(
 );
 app.use(bodyParser.json());
 
-app.get("/", async (_req: Request, res: Response) => {
-  const posts = await prisma.post.findMany({
-    select: {
-      id: true,
-      title: true,
-    },
-  });
-  res.json(posts);
-});
-
 app.get("/:id", async (req: Request, res: Response) => {
+  console.log(req.params);
   const post = await prisma.post.findUnique({
     where: {
       id: req.params.id,
@@ -52,8 +43,18 @@ app.get("/:id", async (req: Request, res: Response) => {
     },
   });
   console.log(post);
-  res.json(200);
+  res.status(200);
   res.json(post);
+});
+
+app.get("/", async (_req: Request, res: Response) => {
+  const posts = await prisma.post.findMany({
+    select: {
+      id: true,
+      title: true,
+    },
+  });
+  res.json(posts);
 });
 
 export default app;
