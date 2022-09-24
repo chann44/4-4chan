@@ -47,6 +47,37 @@ app.get("/:id", async (req: Request, res: Response) => {
   res.json(post);
 });
 
+app.post("/cc", async (req: Request, res: Response) => {
+  const message = req.body.message;
+  console.log(req.body);
+  const postId = req.body.postId;
+  const parentId = req.body.parentId;
+  console.log(parentId);
+  const comment = await prisma.comment.create({
+    data: {
+      message: message,
+      postId: postId,
+      parentId: parentId,
+    },
+    select: {
+      id: true,
+      likes: true,
+      message: true,
+      postId: true,
+      parentId: true,
+      user: {
+        select: {
+          username: true,
+          id: true,
+        },
+      },
+    },
+  });
+
+  console.log(comment);
+  res.json(comment);
+});
+
 app.get("/", async (_req: Request, res: Response) => {
   const posts = await prisma.post.findMany({
     select: {

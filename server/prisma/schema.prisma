@@ -26,8 +26,8 @@ model comment {
   message   String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  user      user      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
+  user      user?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String?
   post      post      @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String
   parent    comment?  @relation("ParentChild", fields: [parentId], references: [id], onDelete: Cascade)
