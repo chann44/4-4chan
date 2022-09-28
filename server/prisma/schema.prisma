@@ -19,6 +19,8 @@ model post {
   title   String
   body    String
   comment comment[]
+  board   Board?    @relation(fields: [boardId], references: [id])
+  boardId String
 }
 
 model comment {
@@ -43,4 +45,18 @@ model like {
   commentId String
 
   @@id([userId, commentId])
+}
+
+model Catagory {
+  id    String  @id @default(uuid())
+  name  String
+  Board Board[]
+}
+
+model Board {
+  id         String    @id @default(uuid())
+  name       String
+  post       post[]
+  catagory   Catagory? @relation(fields: [catagoryId], references: [id])
+  catagoryId String
 }
