@@ -6,10 +6,11 @@
   "author": "chan44",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/index.ts"
+    "dev": "ts-node-dev src/index.ts",
+    "test-data": "ts-node src/uttils/data.ts"
   },
   "prisma": {
-    "seed": "ts-node src/seed.ts"
+    "seed": "ts-node src/uttils/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "4.3.1",

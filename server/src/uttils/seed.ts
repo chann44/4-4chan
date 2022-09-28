@@ -1,10 +1,26 @@
-import { prisma } from "./prisma";
+import { prisma } from "../prisma";
+import { boardNames, cats, getBoards } from "./data";
 
 async function seed() {
   await prisma.post.deleteMany();
   await prisma.user.deleteMany();
+  await prisma.board.deleteMany();
+  await prisma.catagory.deleteMany();
   const kyle = await prisma.user.create({ data: { username: "kyle" } });
   const sally = await prisma.user.create({ data: { username: "vikash" } });
+
+  const catagories = await prisma.catagory.createMany({
+    data: cats,
+  });
+
+  const boardsData: any = getBoards(boardNames, "4");
+
+  const boards = await prisma.board.createMany({
+    data: boardsData,
+  });
+  console.log(boards);
+
+  console.log(catagories);
 
   const post1 = await prisma.post.create({
     data: {
