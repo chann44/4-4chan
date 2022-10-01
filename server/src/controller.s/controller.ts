@@ -88,12 +88,24 @@ export const createPost = async (req: Request, res: Response) => {
 
 // create a comment
 export const createCommetn = async (req: Request, res: Response) => {
+  const parentId = req.body.parentId;
+  console.log(parentId);
+  const message = req.body.message;
+  const postId = req.body.postId;
+
+  const commentData = parentId
+    ? {
+        parentId: parentId,
+        message: message,
+        postId: postId,
+      }
+    : {
+        message: message,
+        postId: postId,
+      };
+
   const comment = await prisma.comment.create({
-    data: {
-      message: req.body.message,
-      parentId: req.body.parentId,
-      postId: req.body.postId,
-    },
+    data: commentData,
   });
   res.status(200);
   res.json(comment);

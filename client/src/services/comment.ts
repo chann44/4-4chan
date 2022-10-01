@@ -6,7 +6,7 @@ export const createComment = (
   postId: string
 ) => {
   console.log(message);
-  return makeRequest("/cc", {
+  return makeRequest("/createcomment", {
     method: "POST",
     data: {
       message,

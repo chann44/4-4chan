@@ -33,19 +33,31 @@ export const AddComment = ({ intialValue = "", parentId }: Props) => {
             handleSubmit();
           }}
         >
-          <textarea
-            name=""
-            id=""
-            cols={40}
-            rows={2}
-            value={commentValue}
-            onChange={(e) => {
-              setCommentValue(e.target.value);
-            }}
-          ></textarea>
-          <button type="submit" className="btn">
-            comment
-          </button>
+          <div className="flex flex-col">
+            <p className="mb-5">
+              Comment as <span className="text-primary">Annoynmus</span>
+            </p>
+            <textarea
+              className="bg-transparent border border-gray-600 w-full p-4"
+              name=""
+              id=""
+              cols={60}
+              rows={10}
+              value={commentValue}
+              placeholder="what do you think ??"
+              onChange={(e) => {
+                setCommentValue(e.target.value);
+              }}
+            ></textarea>
+            <div className="flex w-full justify-end">
+              <button
+                type="submit"
+                className=" w-max bg-primary/70 hover:bg-primary text-black px-6 my-3 py-2 rounded-full "
+              >
+                comment
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </>

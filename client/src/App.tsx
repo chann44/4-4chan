@@ -8,21 +8,30 @@ import { Boards } from "./pages/Boards";
 
 function App() {
   return (
-    <div className="w-[90%] lg:w-[70%] m-auto">
+    <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Boards />} />
-        <Route path="/:board/posts" element={<PostList />} />
-        <Route
-          path="/:id"
-          element={
-            <PostContextProvider>
-              <PostDetails />
-            </PostContextProvider>
-          }
-        />
-      </Routes>
-    </div>
+      <div className="w-[90%]  lg:w-[70%] m-auto">
+        <Routes>
+          <Route path="/" element={<Boards />} />
+          <Route
+            path="/:board/posts"
+            element={
+              <PostContextProvider>
+                <PostDetails />
+              </PostContextProvider>
+            }
+          />
+          <Route
+            path="/:id"
+            element={
+              <PostContextProvider>
+                <PostDetails />
+              </PostContextProvider>
+            }
+          />
+        </Routes>
+      </div>
+    </>
   );
 }
 

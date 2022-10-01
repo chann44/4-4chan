@@ -5,7 +5,7 @@ export const getPost = async () => {
 };
 
 export const getPostById = async (id: string | undefined) => {
-  return makeRequest(`/${id}`, {});
+  return makeRequest(`/post/${id}`, {});
 };
 
 export const getAllBoards = async () => {

@@ -1,6 +1,12 @@
 import { comment, usePost } from "../context/PostContextProvider";
 import { IconBtn } from "./IconButton";
-import { FaHeart, FaReply, FaEdit, FaTrash } from "react-icons/fa";
+import {
+  FaHeart,
+  FaReply,
+  FaEdit,
+  FaTrash,
+  FaExpandArrowsAlt,
+} from "react-icons/fa";
 import { useState } from "react";
 import { CommentList } from "./commentlist";
 import { AddComment } from "./addCommentinput";
@@ -12,24 +18,21 @@ const dateFormatter = new Intl.DateTimeFormat(undefined, {
 });
 
 export const Comment = ({ id, message, createdAt }: comment) => {
-  const { getReplies, post, createLocalComment, isReplying, setIsReplying } =
-    usePost();
+  const { getReplies, post, createLocalComment } = usePost();
+  const [isReplying, setIsReplying] = useState(false);
   const [commentValue, setCommentValue] = useState("");
   const childComments: comment[] = getReplies(id);
   const [areChildrenHidden, setAreChildrenHidden] = useState(false);
   const { execute: addComment } = useAsyncFn(createComment);
   return (
     <>
-      <div className="comment">
+      <div className="comment border-none">
         <div className="header">
-          <span className="name">annoynmus</span>
+          <span className="name text-primary">annoynmus</span>
         </div>
 
         <div className="message">{message}</div>
         <div className="footer">
-          <IconBtn Icon={FaHeart} aria-lable="like">
-            2
-          </IconBtn>
           <div
             onClick={(prev) => {
               setIsReplying(!isReplying);
@@ -37,8 +40,6 @@ export const Comment = ({ id, message, createdAt }: comment) => {
           >
             <IconBtn Icon={FaReply} aria-lable="reply" />
           </div>
-          <IconBtn Icon={FaEdit} aria-lable="edit" />
-          <IconBtn Icon={FaTrash} color="danger" aria-lable="trash" />
         </div>
         <div>{isReplying && <AddComment intialValue="" parentId={id} />}</div>
       </div>
@@ -63,12 +64,11 @@ export const Comment = ({ id, message, createdAt }: comment) => {
 
           {areChildrenHidden && (
             <button
-              className="btn"
               onClick={() => {
                 setAreChildrenHidden(false);
               }}
             >
-              show Replies
+              <FaExpandArrowsAlt />
             </button>
           )}
         </>
