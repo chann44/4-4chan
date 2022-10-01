@@ -3,13 +3,16 @@ import { PostList } from "./pages/postlist";
 import { Route, Routes } from "react-router-dom";
 import { PostDetails } from "./componet/postdetails";
 import { PostContextProvider } from "./context/PostContextProvider";
-import { Home } from "./pages/home";
+import { Navbar } from "./componet/Navbar";
+import { Boards } from "./pages/Boards";
 
 function App() {
   return (
-    <div>
+    <div className="w-[90%] lg:w-[70%] m-auto">
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Boards />} />
+        <Route path="/:board/posts" element={<PostList />} />
         <Route
           path="/:id"
           element={
