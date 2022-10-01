@@ -2,9 +2,10 @@
 import { Request, Response } from "express";
 import { prisma } from "../prisma";
 export const getAllPostByBoard = async (req: Request, res: Response) => {
+  console.log(req.params.boardId);
   const post = await prisma.post.findMany({
     where: {
-      boardId: req.params.id,
+      boardId: req.params.boardId,
     },
     select: {
       body: true,
@@ -30,7 +31,6 @@ export const getAllPostByBoard = async (req: Request, res: Response) => {
       },
     },
   });
-  console.log(post);
   res.status(200);
   res.json(post);
 };
@@ -46,6 +46,7 @@ export const getPostbyID = async (req: Request, res: Response) => {
       body: true,
       id: true,
       title: true,
+      board: true,
       comment: {
         orderBy: {
           createdAt: "desc",
@@ -96,4 +97,10 @@ export const createCommetn = async (req: Request, res: Response) => {
   });
   res.status(200);
   res.json(comment);
+};
+
+export const getAllBoards = async (_req: Request, res: Response) => {
+  const boards = await prisma.board.findMany();
+  res.status(200);
+  res.json(boards);
 };

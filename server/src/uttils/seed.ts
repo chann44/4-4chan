@@ -1,5 +1,5 @@
 import { prisma } from "../prisma";
-import { boardNames, cats, getBoards } from "./data";
+import { cats, getBoardData } from "./data";
 
 async function seed() {
   await prisma.post.deleteMany();
@@ -13,11 +13,12 @@ async function seed() {
     data: cats,
   });
 
-  const boardsData: any = getBoards(boardNames, "4");
+  const boardsData: any = getBoardData();
 
   const boards = await prisma.board.createMany({
     data: boardsData,
   });
+
   console.log(boards);
 
   console.log(catagories);
