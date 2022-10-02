@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { BsImages } from "react-icons/bs";
 import { AiOutlineLink } from "react-icons/ai";
 import { PostINdexView } from "../componet/postIndeview";
+import { CreatePost } from "../componet/CreatePost";
 
 export interface Post {
   id: string;
@@ -13,6 +14,8 @@ export interface Post {
 
 export const PostList = () => {
   const [bg, setBg] = useState("");
+  const [modal, setModal] = useState(false);
+  const [val, setVal] = useState("");
 
   useEffect(() => {
     setBg(backgrounds[getRandomInt(0, 12)]);
@@ -51,6 +54,10 @@ export const PostList = () => {
             </div>
           </div>
           <input
+            onClick={() => {
+              setVal("post");
+              setModal(true);
+            }}
             className="grow p-3 bg-[#262629]"
             placeholder="create a post"
             type="text"
@@ -59,10 +66,23 @@ export const PostList = () => {
           />
           <div className="flex ">
             <div className="hover:bg-[#262629] p-2 mx-2 cursor-pointer ">
-              <BsImages size={18} className=" " />
+              <BsImages
+                size={18}
+                className=" "
+                onClick={() => {
+                  setVal("image");
+                  setModal(true);
+                }}
+              />
             </div>
             <div className="hover:bg-[#262629] p-2 mx-2 cursor-pointer">
-              <AiOutlineLink size={19} />
+              <AiOutlineLink
+                size={19}
+                onClick={() => {
+                  setVal("link");
+                  setModal(true);
+                }}
+              />
             </div>
           </div>
         </div>
@@ -83,6 +103,9 @@ export const PostList = () => {
           <PostINdexView />
           <PostINdexView />
         </div>
+        {modal ? (
+          <CreatePost val={val} modal={modal} setModal={setModal} />
+        ) : null}
       </div>
     </>
   );

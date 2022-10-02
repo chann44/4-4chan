@@ -12,7 +12,7 @@ function App() {
       <Navbar />
       <div className="w-[90%]  lg:w-[70%] m-auto">
         <Routes>
-          <Route path="/" element={<Boards />} />
+          <Route path="/" element={<PostList />} />
           <Route
             path="/:board/posts"
             element={
