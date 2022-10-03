@@ -13,56 +13,60 @@ _NOTE : please do not create any violating contents here as is this database is 
 Clone the repo to your local machine
 
 ```bash
-git clone https://github.com/anuraghazra/QuickerPoll.git
-```
-
-Install all the dependencies
-
-```bash
-npm install
-```
-
-Start the application on localhost:3000
-
-```bash
-npm run dev
+git git@github.com:chann44/4-4chan.git
 ```
 
 ### NPM Commands
 
-start the application
+Install all the dependencies
 
 ```bash
-npm run dev
+cd client
+yarn
 ```
 
-start the backend server
+Start the client on localhost:5173
 
 ```bash
-npm start
+cd client
+yarn dev
 ```
 
-watch for changes in server
+Install all server side dependencies
 
 ```bash
-npm run watch-server
+cd server
+yarn
 ```
 
-in the ./clients folder to build react front-end type
+create a .env file and add a DATABASE_URL variable and put your postgres db url there
+
+create and seed the db
 
 ```bash
-npm run build
+cd server
+npx prisma migrate dev
+
+npx prisma db seed
+```
+
+Start the server on localhost:5000
+
+```bash
+cd server
+yarn dev
 ```
 
 ## Tools Used
 
 - [React](https://reactjs.org)
-- [AntDesign](https://ant.design)
+- [Vite](https://vitejs.dev/)
 - [Nodejs](https://nodejs.org/)
-- [Heroku](https://heroku.com/)
 - [Express](https://expressjs.com/)
 - [Axios](https://github.com/axios/axios)
-- [Mongoosejs](https://mongoosejs.com/)
-- [mLab](https://mlab.com/)
+- [Prisma](https://www.prisma.io/)
+- [Postgres](https://www.postgresql.org/)
+- [Tailwind](https://tailwindcss.com/)
+- [Typescript](https://www.typescriptlang.org/)
 
-Made with :heart: and javascript
+Made with :heart: and Typescript
