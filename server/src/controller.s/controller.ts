@@ -3,28 +3,23 @@ import { Request, Response } from "express";
 import { prisma } from "../prisma";
 export const getAllPostByBoard = async (req: Request, res: Response) => {
   console.log(req.params.boardId);
-  const post = await prisma.post.findMany({
+  const board = await prisma.board.findUnique({
     where: {
-      boardId: req.params.boardId,
+      id: req.params.boardId,
     },
     select: {
-      body: true,
       id: true,
-      title: true,
-      comment: {
-        orderBy: {
-          createdAt: "desc",
-        },
+      name: true,
+      post: {
         select: {
           id: true,
-          likes: true,
-          message: true,
-          postId: true,
-          parentId: true,
-          user: {
+          createdAt: true,
+          title: true,
+          image: true,
+          linkTitle: true,
+          comment: {
             select: {
-              username: true,
-              id: true,
+              _count: true,
             },
           },
         },
@@ -32,7 +27,7 @@ export const getAllPostByBoard = async (req: Request, res: Response) => {
     },
   });
   res.status(200);
-  res.json(post);
+  res.json(board);
 };
 
 // get a post by id
@@ -47,6 +42,9 @@ export const getPostbyID = async (req: Request, res: Response) => {
       id: true,
       title: true,
       board: true,
+      createdAt: true,
+      linkTitle: true,
+      url: true,
       comment: {
         orderBy: {
           createdAt: "desc",
@@ -77,8 +75,29 @@ export const createPost = async (req: Request, res: Response) => {
   const post = await prisma.post.create({
     data: {
       body: req.body.body,
+      image: req.body.image,
+      linkTitle: req.body.linkTitle,
+      url: req.body.url,
       title: req.body.title,
       boardId: req.body.boardId,
+    },
+    select: {
+      id: true,
+      createdAt: true,
+      title: true,
+      image: true,
+      linkTitle: true,
+      board: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      comment: {
+        select: {
+          _count: true,
+        },
+      },
     },
   });
 

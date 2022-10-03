@@ -15,12 +15,16 @@ model user {
 }
 
 model post {
-  id      String    @id @default(uuid())
-  title   String
-  body    String
-  comment comment[]
-  board   Board?    @relation(fields: [boardId], references: [id])
-  boardId String?
+  id        String    @id @default(uuid())
+  title     String
+  body      String
+  comment   comment[]
+  board     Board?    @relation(fields: [boardId], references: [id])
+  boardId   String?
+  url       String?
+  linkTitle String?
+  image     String?
+  createdAt DateTime? @default(now())
 }
 
 model comment {
