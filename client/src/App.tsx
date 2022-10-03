@@ -5,6 +5,7 @@ import { PostDetails } from "./componet/postdetails";
 import { PostContextProvider } from "./context/PostContextProvider";
 import { Navbar } from "./componet/Navbar";
 import { Boards } from "./pages/Boards";
+import { BoardContextProvider } from "./context/boardContext";
 
 function App() {
   return (
@@ -12,13 +13,13 @@ function App() {
       <Navbar />
       <div className="w-[90%]  lg:w-[70%] m-auto">
         <Routes>
-          <Route path="/" element={<PostList />} />
+          <Route path="/" element={<Boards />} />
           <Route
-            path="/:board/posts"
+            path="/:boardId/posts"
             element={
-              <PostContextProvider>
-                <PostDetails />
-              </PostContextProvider>
+              <BoardContextProvider>
+                <PostList />
+              </BoardContextProvider>
             }
           />
           <Route

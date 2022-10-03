@@ -13,6 +13,8 @@ import {
   AiOutlineSend,
 } from "react-icons/ai";
 import { BsImage } from "react-icons/bs";
+import { useBoard } from "../context/boardContext";
+import { api } from "../uttils/makeRequest";
 
 interface Props {
   modal: boolean;
@@ -45,6 +47,33 @@ export const CreatePost = ({ modal, setModal, val }: Props) => {
   const [linkTitle, setLinkTitle] = useState("");
   const [link, setLink] = useState("");
   const [title, setTitle] = useState("");
+  const { board, setPosts } = useBoard();
+
+  const create = async () => {
+    try {
+      const res = await api("/createpost", {
+        method: "POST",
+        data: {
+          body: postValue,
+          image: null,
+          linkTitle: linkTitle,
+          url: link,
+          title: title,
+          boardId: board?.id,
+        },
+      });
+      setPosts((prev: any) => {
+        return [res.data, ...prev];
+      });
+      setPostValue("");
+      setTitle("");
+      setLink("");
+      setLinkTitle("");
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <>
@@ -60,7 +89,13 @@ export const CreatePost = ({ modal, setModal, val }: Props) => {
               >
                 <AiOutlineClose />
               </button>
-              <button className="text-3xl" onClick={() => {}}>
+              <button
+                className="text-3xl"
+                onClick={() => {
+                  create();
+                  setModal(false);
+                }}
+              >
                 <AiOutlineSend />
               </button>
             </div>

@@ -6,21 +6,18 @@ import { BsImages } from "react-icons/bs";
 import { AiOutlineLink } from "react-icons/ai";
 import { PostINdexView } from "../componet/postIndeview";
 import { CreatePost } from "../componet/CreatePost";
-
-export interface Post {
-  id: string;
-  title: string;
-}
+import { Post, useBoard } from "../context/boardContext";
+import { Link } from "react-router-dom";
 
 export const PostList = () => {
   const [bg, setBg] = useState("");
   const [modal, setModal] = useState(false);
   const [val, setVal] = useState("");
 
+  const { board, posts } = useBoard();
   useEffect(() => {
     setBg(backgrounds[getRandomInt(0, 12)]);
   }, []);
-  const { error, loading, value: posts } = useAsync(getPost);
 
   return (
     <>
@@ -34,19 +31,19 @@ export const PostList = () => {
           <ul className="flex items-center">
             <li>
               <a>
-                <h1 className="text-7xl px-7 font-extrabold text-white">
-                  Posts
+                <h1 className="text-4xl px-7 font-extrabold text-white">
+                  {board?.title}
                 </h1>
               </a>
             </li>
             <li>
               <a>Home</a>
             </li>
-            <li>Post</li>
+            <li>browse</li>
           </ul>
         </div>
       </div>
-      <div>
+      <div className="min-h-screen">
         <div className="flex items-center my-12 space-x-4 bg-[#1B1B1B] p-3 rounded">
           <div className="avatar">
             <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
@@ -87,21 +84,20 @@ export const PostList = () => {
           </div>
         </div>
         <div>
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
-          <PostINdexView />
+          {posts?.map((post: Post) => {
+            return (
+              <Link to={`/${post.id}`}>
+                <PostINdexView
+                  url={post.linkTitle}
+                  image={post.image}
+                  id={post.id}
+                  title={post.title}
+                  createdAt={post.createdAt}
+                  commentCount={post.comment.length}
+                />
+              </Link>
+            );
+          })}
         </div>
         {modal ? (
           <CreatePost val={val} modal={modal} setModal={setModal} />

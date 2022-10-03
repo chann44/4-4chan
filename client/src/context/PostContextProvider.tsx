@@ -36,11 +36,7 @@ export const usePost = () => {
 
 export const PostContextProvider = ({ children }: Props) => {
   const { id } = useParams();
-  const {
-    error,
-    loading,
-    value: post,
-  } = useAsync(() => getPostById("8de11308-9c59-49e2-a6d6-aee17eaecd23"), [id]);
+  const { error, loading, value: post } = useAsync(() => getPostById(id), [id]);
   const [comments, setComments] = useState<comment[] | null>(null);
   const [isReplying, setIsReplying] = useState(false);
   const commentByParentID = useMemo(() => {
@@ -85,6 +81,7 @@ export const PostContextProvider = ({ children }: Props) => {
           createLocalComment,
           isReplying,
           setIsReplying,
+          comments,
         }}
       >
         {children}

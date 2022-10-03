@@ -7,6 +7,7 @@ interface board {
   id: string;
   name: string;
   catagoryId: string;
+  post: any;
 }
 
 export const Boards = () => {
@@ -34,7 +35,11 @@ export const Boards = () => {
           <div className="flex flex-wrap ">
             {boards?.map((board: board, index: number) => {
               return (
-                <BoardCard boardId={board.id} name={board.name} posts={index} />
+                <BoardCard
+                  boardId={board.id}
+                  name={board.name}
+                  posts={board.post.length}
+                />
               );
             })}
           </div>
