@@ -131,7 +131,18 @@ export const createCommetn = async (req: Request, res: Response) => {
 };
 
 export const getAllBoards = async (_req: Request, res: Response) => {
-  const boards = await prisma.board.findMany();
+  const boards = await prisma.board.findMany({
+    select: {
+      name: true,
+      catagoryId: true,
+      id: true,
+      post: {
+        select: {
+          _count: true,
+        },
+      },
+    },
+  });
   res.status(200);
   res.json(boards);
 };
