@@ -4,7 +4,7 @@
 
 _NOTE : please do not create any violating contents here as is this database is publicly visible and i'm not responsibe for any violating content_
 
-## Demo Video:
+## Demo Video (click to watch):
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Be8o9KWezCw/0.jpg)](https://www.youtube.com/watch?v=Be8o9KWezCw)
 
