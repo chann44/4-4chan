@@ -84,24 +84,20 @@ export const PostList = () => {
           </div>
         </div>
         <div>
-          {posts != [] ? (
-            posts?.map((post: Post) => {
-              return (
-                <Link to={`/${post.id}`}>
-                  <PostINdexView
-                    url={post.linkTitle}
-                    image={post.image}
-                    id={post.id}
-                    title={post.title}
-                    createdAt={post.createdAt}
-                    commentCount={post.comment.length}
-                  />
-                </Link>
-              );
-            })
-          ) : (
-            <p className="text-5xl text-white">loading ... </p>
-          )}
+          {posts?.map((post: Post) => {
+            return (
+              <Link to={`/${post.id}`}>
+                <PostINdexView
+                  url={post.linkTitle}
+                  image={post.image}
+                  id={post.id}
+                  title={post.title}
+                  createdAt={post.createdAt}
+                  commentCount={post.comment.length}
+                />
+              </Link>
+            );
+          })}
         </div>
         {modal ? (
           <CreatePost val={val} modal={modal} setModal={setModal} />

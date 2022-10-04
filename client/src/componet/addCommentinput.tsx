@@ -6,7 +6,7 @@ import { createComment } from "../services/comment";
 interface Props {
   intialValue: string;
   parentId: string;
-  setIsReply: any;
+  setIsReply?: any;
 }
 
 export const AddComment = ({
