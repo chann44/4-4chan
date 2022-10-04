@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const api = axios.create({
   baseURL: "https://four4chanbackend.onrender.com",
+
+  // baseURL: "http://localhost:5000",
 });
 
 export const makeRequest = async (url: string, options: any) => {

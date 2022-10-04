@@ -29,6 +29,7 @@ function useAsyncInternal(
       .then((data: any) => {
         setValue(data);
         setError(undefined);
+        setLoading(false);
         return data;
       })
       .catch((error: any) => {

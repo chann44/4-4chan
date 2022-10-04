@@ -34,17 +34,21 @@ export const Boards = () => {
           </ul>
         </div>
         <div>
-          <div className="flex flex-wrap ">
-            {boards?.map((board: board, index: number) => {
-              return (
-                <BoardCard
-                  boardId={board.id}
-                  name={board.name}
-                  posts={board.post.length}
-                />
-              );
-            })}
-          </div>
+          {loading ? (
+            <p className="text-white 5xl">loading</p>
+          ) : (
+            <div className="flex flex-wrap ">
+              {boards?.map((board: board, index: number) => {
+                return (
+                  <BoardCard
+                    boardId={board.id}
+                    name={board.name}
+                    posts={board.post.length}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </>
