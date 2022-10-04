@@ -55,6 +55,7 @@ export const getPostbyID = async (req: Request, res: Response) => {
           message: true,
           postId: true,
           parentId: true,
+          createdAt: true,
           user: {
             select: {
               username: true,

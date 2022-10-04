@@ -6,11 +6,16 @@ import { createComment } from "../services/comment";
 interface Props {
   intialValue: string;
   parentId: string;
+  setIsReply: any;
 }
 
-export const AddComment = ({ intialValue = "", parentId }: Props) => {
+export const AddComment = ({
+  intialValue = "",
+  parentId,
+  setIsReply,
+}: Props) => {
   const [commentValue, setCommentValue] = useState(intialValue);
-  const { post, createLocalComment, setIsReplying } = usePost();
+  const { post, createLocalComment } = usePost();
   const { loading, error, execute: addComment } = useAsyncFn(createComment);
   const handleSubmit = async () => {
     console.log(commentValue);
@@ -18,7 +23,7 @@ export const AddComment = ({ intialValue = "", parentId }: Props) => {
     console.log("parentid", parentId);
     await createLocalComment(comment);
     setCommentValue("");
-    setIsReplying(false);
+    setIsReply(false);
   };
 
   return (

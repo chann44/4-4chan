@@ -9,6 +9,7 @@ export const getPostById = async (id: string | undefined) => {
 };
 
 export const getAllBoards = async () => {
+  console.log("hey");
   return makeRequest("/boards", {});
 };
 

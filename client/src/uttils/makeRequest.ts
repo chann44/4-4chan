@@ -7,6 +7,7 @@ export const api = axios.create({
 export const makeRequest = async (url: string, options: any) => {
   try {
     const res = await api(url, options);
+    console.log(url);
     console.log(res);
     return res.data;
   } catch (e: any) {

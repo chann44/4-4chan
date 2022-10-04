@@ -13,6 +13,8 @@ interface board {
 export const Boards = () => {
   const { error, loading, value: boards } = useAsync(getAllBoards);
 
+  console.log(boards);
+
   return (
     <>
       <div className="px-2">
